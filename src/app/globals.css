@@ -222,3 +222,112 @@ dialog::backdrop { background: #07050ce8; backdrop-filter: blur(10px); }
 .card-preview { display: grid; place-items: center; padding: 20px; }
 .card-preview > div { width: min(100%, 180px); }
 @media (max-width: 760px) and (min-width: 521px) { .card-preview > div { width: min(100%, 130px); } }
+
+@font-face { font-family: "Encore Sans"; src: url("/fonts/EncoreSans.ttf") format("truetype"); font-weight: 100 900; font-display: swap; }
+@font-face { font-family: "Encore Display"; src: url("/fonts/EncoreDisplay.ttf") format("truetype"); font-weight: 700; font-display: swap; }
+@font-face { font-family: "Encore Serif"; src: url("/fonts/EncoreSerif.ttf") format("truetype"); font-weight: 400; font-display: swap; }
+@font-face { font-family: "Encore JP"; src: url("/fonts/EncoreJP.ttf") format("truetype"); font-weight: 100 900; font-display: swap; }
+.advanced-poster { aspect-ratio: auto; }
+.advanced-poster .poster-content { min-height: 133.333cqw; font-family: "Encore Sans", sans-serif; }
+.advanced-poster .poster-title-block h2 { transform: none; margin: 0; overflow-wrap: anywhere; word-break: normal; text-wrap: balance; }
+.advanced-poster .poster-tier { overflow-wrap: anywhere; }
+.advanced-poster .poster-tier span { min-width: 0; overflow-wrap: anywhere; }
+.advanced-poster .poster-date, .advanced-poster .poster-location, .advanced-poster .poster-title-block p { overflow-wrap: anywhere; }
+.design-section { display: flex; flex-direction: column; gap: 18px; }
+.design-section .section-caption { margin-bottom: 3px; }
+.design-select { display: flex; flex-direction: column; gap: 8px; color: #bfa7d1; font-size: 10px; }
+.design-select select { width: 100%; color: #e2ceed; background: #22192c; border: 1px solid #4b345e; padding: 11px 10px; border-radius: 6px; font-size: 11px; }
+.design-slider { display: flex; flex-direction: column; gap: 11px; color: #bfa7d1; font-size: 10px; }
+.design-slider > span { display: flex; justify-content: space-between; gap: 12px; }
+.design-slider output { color: #d9b7fb; font-size: 10px; font-variant-numeric: tabular-nums; }
+.design-slider input { width: 100%; height: 20px; accent-color: #b48ae9; cursor: pointer; }
+.design-slider input:focus-visible { outline: 2px solid #bb94e9; outline-offset: 3px; border-radius: 4px; }
+.typography-sample { font-family: "Encore Sans", "Encore JP", sans-serif; background: #2c1e3a; color: #dcc3f6; border-radius: 8px; padding: 15px; font-size: 20px; overflow-wrap: anywhere; }
+.alignment-control { border: 0; padding: 0; display: flex; gap: 8px; }
+.alignment-control legend { font-size: 10px; margin-bottom: 10px; color: #bfa7d1; }
+.alignment-control button { flex: 1; padding: 9px; border: 1px solid #493355; background: #201727; color: #ac8dc3; border-radius: 5px; font-size: 10px; text-transform: capitalize; }
+.alignment-control button[aria-pressed="true"] { background: #70479c55; border-color: #ae7dd2; color: #ead9f8; }
+.design-hint { color: #a08bab; font-size: 10px; line-height: 1.8; margin: 0; }
+
+/* Advanced poster art uses the same DOM for thumbnails, preview and PNG export. */
+.advanced-poster .poster-title-block p { color: inherit; }
+.advanced-poster .poster-rule { background: currentColor; opacity: .25; }
+.advanced-poster .poster-lineup { gap: 1.6em; }
+.designer-glow, .designer-pattern { position: absolute; inset: 0; pointer-events: none; }
+.pattern-grid { background-image: linear-gradient(#ffffff80 1px, transparent 1px), linear-gradient(90deg,#ffffff80 1px,transparent 1px); background-size: 7% 5%; transform: perspective(250px) rotateX(25deg) scale(1.3); transform-origin: bottom; }
+.pattern-dots { background-image: radial-gradient(currentColor .7px,transparent .9px); background-size: 5px 5px; }
+.pattern-waves { background-image: repeating-radial-gradient(ellipse at 10% 0%,transparent 0,transparent 20px,#ffffff40 21px,transparent 22px); }
+.pattern-none { display: none; }
+.tokyo-scene, .sunset-scene, .retro-art, .editorial-art { position: absolute; inset: 0; }
+.tokyo-moon { position: absolute; width: 50%; aspect-ratio: 1; top: 16%; right: -7%; border-radius: 50%; background: linear-gradient(160deg,#f651bd,var(--poster-bright)); box-shadow: 0 0 55px #fc39c955; }
+.tokyo-buildings { position: absolute; inset: 28% 0 33%; display: flex; align-items: flex-end; justify-content: space-around; border-bottom: 2px solid var(--poster-bright); }
+.tokyo-buildings i { display: block; background: repeating-linear-gradient(0deg,#0d143a 0,#0d143a 8px,#56bce18a 9px,#0d143a 10px); border: 1px solid var(--poster-bright); box-shadow: 2px 0 0 #36d9ef99; }
+.tokyo-horizon { position: absolute; inset: 67% 0 0; background: repeating-linear-gradient(0deg,transparent 0,transparent 12px,var(--poster-bright) 13px,transparent 14px); transform: perspective(180px) rotateX(55deg); transform-origin: top; }
+.template-tokyo-nights .poster-kicker { border-bottom: 1px solid var(--poster-bright); padding-bottom: 1.5em; }
+.template-tokyo-nights .poster-title-block { padding-top: 12%; padding-right: 10%; }
+.template-tokyo-nights .poster-title-block h2 { text-shadow: 3px 2px 0 #fc4aaf70; }
+.template-tokyo-nights .poster-edition { letter-spacing: .25em; text-align: left; color: #76d9ef; }
+.template-tokyo-nights .poster-lineup { margin-top: 25%; padding: 1.5em; background: #080b29cc; border-left: 2px solid var(--poster-bright); }
+.template-tokyo-nights .poster-tier-0 span:first-child { flex-basis: 100%; }
+.template-tokyo-nights .poster-bottom { padding-top: 7%; }
+.sunset-disc { width: 63%; aspect-ratio: 1; position: absolute; top: 16%; left: 18.5%; border-radius: 50%; background: var(--poster-bright); }
+.desert-ridge { position: absolute; width: 120%; height: 27%; left: -10%; top: 35%; clip-path: polygon(0% 30%,20% 8%,43% 58%,66% 23%,100% 60%,100% 100%,0% 100%); background: #863c44; }
+.ridge-far { opacity: .6; transform: scaleX(-1); }
+.ridge-near { top: 43%; background: var(--poster-end); opacity: .65; }
+.sunset-lines { position: absolute; inset: 50% 0 0; background: repeating-linear-gradient(0deg,transparent 0,transparent 16px,#eec18b 17px,transparent 18px); }
+.template-golden-hour .poster-title-block { padding-top: 12%; }
+.template-golden-hour .poster-lineup { margin-top: 32%; background: linear-gradient(0deg,var(--poster-end),transparent); padding: 1em 0; }
+.template-golden-hour .poster-edition { letter-spacing: .3em; }
+.template-golden-hour .poster-kicker { letter-spacing: .3em; }
+.template-golden-hour .poster-bottom { padding-top: 6%; }
+.editorial-circle { position: absolute; width: 55%; aspect-ratio: 1; top: 7%; right: -10%; border: 1px solid currentColor; border-radius: 50%; }
+.editorial-line { position: absolute; left: 6%; top: 11%; width: 88%; height: 1px; background: currentColor; }
+.template-minimalist .poster-title-block { padding-top: 17%; padding-bottom: 8%; border-bottom: 1px solid currentColor; }
+.template-minimalist .poster-edition { text-align: left; letter-spacing: .15em; margin-bottom: 3em; }
+.template-minimalist .poster-kicker span:last-child { font-size: 2.1em; }
+.template-minimalist .poster-lineup { margin-top: 8%; gap: 2em; }
+.template-minimalist .poster-tier-0 { flex-direction: column; align-items: stretch; }
+.template-minimalist .poster-tier-0 span:first-child { font-size: 1em; flex-basis: auto; }
+.template-minimalist .poster-tier-1, .template-minimalist .poster-tier-2 { border-top: 1px solid #0003; padding-top: 1.3em; }
+.template-minimalist .poster-bottom { margin-top: 12%; padding-top: 3%; border-top: 3px solid currentColor; }
+.template-minimalist .poster-title-block p { font-style: normal; }
+.retro-rays { position: absolute; width: 180%; aspect-ratio: 1; left: -40%; top: -40%; border-radius: 50%; background: repeating-conic-gradient(var(--poster-bright) 0deg 9deg,transparent 9deg 24deg); }
+.retro-rings { position: absolute; width: 78%; aspect-ratio: 1; left: 11%; top: 10%; border: 6px double var(--poster-bright); border-radius: 50%; opacity: .7; }
+.retro-star { position: absolute; font-size: 10cqw; color: var(--poster-bright); }
+.star-one { left: 5%; top: 36%; }.star-two { right: 5%; top: 50%; }
+.template-retro-festival .poster-title-block { padding-top: 18%; padding-bottom: 12%; }
+.template-retro-festival .poster-title-block h2 { text-shadow: 2px 2px 0 #f8e4b8; }
+.template-retro-festival .poster-edition { letter-spacing: .2em; }
+.template-retro-festival .poster-lineup { margin-top: 1%; padding: 2em 1.5em; border: 3px double currentColor; border-radius: 45% 45% 5% 5% / 9% 9% 2% 2%; background: #f0d5a0d9; }
+.template-retro-festival .poster-bottom { padding-top: 8%; }
+.design-section-nav { display: grid; grid-template-columns: repeat(3,1fr); padding: 4px; background: #0f0b16; border: 1px solid #36253f; border-radius: 7px; gap: 4px; margin-bottom: 24px; }
+.design-section-nav button { border: 0; color: #9e83b3; background: transparent; border-radius: 4px; padding: 10px 3px; font-size: 10px; }
+.design-section-nav button[aria-pressed="true"] { color: #e2c9fa; background: #432c5c; }
+.color-controls { display: grid; grid-template-columns: 1fr 1fr; gap: 13px; }
+.color-controls label { display: flex; align-items: center; gap: 9px; min-width: 0; padding: 10px; background: #211729; border: 1px solid #3a2847; border-radius: 6px; }
+.color-controls input { width: 31px; height: 31px; padding: 0; background: transparent; border: 0; cursor: pointer; flex-shrink: 0; }
+.color-controls span { font-size: 9px; color: #c5abd6; }
+.color-controls small { display: block; font-size: 8px; color: #8e779f; margin-top: 5px; }
+.background-palette-buttons { display: flex; flex-wrap: wrap; gap: 7px; }
+.background-palette-buttons button { display: flex; gap: 6px; align-items: center; background: #251b31; border: 1px solid #4e345c; color: #c1a2d5; padding: 7px; border-radius: 5px; font-size: 8px; }
+.background-palette-buttons i { width: 13px; height: 13px; border-radius: 50%; }
+.design-checkbox { display: flex; align-items: center; gap: 9px; font-size: 11px; color: #bca2cc; }
+.design-checkbox input { width: 16px; height: 16px; accent-color: #aa7ad8; }
+.template-gallery { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 13px; }
+.template-card { min-width: 0; padding: 10px; border: 1px solid #483052; background: #1f1629; color: #d6bce9; border-radius: 8px; text-align: left; }
+.template-card.selected { border-color: #bf90ee; box-shadow: 0 0 0 1px #bf90ee33; }
+.template-thumbnail { pointer-events: none; width: 100%; aspect-ratio: 3 / 4; overflow: hidden; border-radius: 3px; background: #120c1b; margin-bottom: 12px; }
+.template-card strong { display: block; font-size: 11px; font-weight: 550; }
+.template-card small { display: block; margin-top: 6px; font-size: 8px; color: #9681a4; line-height: 1.7; }
+.template-current { display: block; margin-top: 10px; color: #ba8ce1; font-size: 6px; letter-spacing: .8px; }
+@media (min-width: 761px) { .preview-panel { position: sticky; top: 20px; } }
+@media (max-width: 760px) { .color-controls label { padding: 9px; }.design-section-nav button { font-size: 10px; padding: 12px 2px; } }
+.exported-poster { display: block; max-height: 53vh; width: auto; max-width: 100%; height: auto; object-fit: contain; margin: 0 auto; }
+.project-dialog:has(.exported-poster) { width: min(600px, 92vw); max-height: 92vh; overflow: auto; }
+.project-dialog .export-button { text-decoration: none; }
+.color-controls .color-control { display: flex; align-items: center; gap: 9px; min-width: 0; padding: 10px; background: #211729; border: 1px solid #3a2847; border-radius: 6px; }
+.color-controls .color-control > span { min-width: 0; }
+.color-controls input.hex-color-input { display: block; width: 100%; max-width: 80px; height: auto; color: #b195c5; font-size: 9px; padding: 4px 0 0; font-family: var(--font-geist-mono),monospace; }
+/* Cream panels keep sunset typography legible against the warm horizon. */
+.template-golden-hour .poster-lineup { background: #f7dfb5eb; padding: 1.7em 1em; border-radius: 2px; }
+.template-golden-hour .poster-bottom { margin-top: 5%; padding: 5%; background: #f7dfb5eb; }

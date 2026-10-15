@@ -1,6 +1,7 @@
 "use client";
 
 import { CalendarDays, Copy, FolderHeart, Music2, Pencil, Plus, Sparkles, Trash2, ArrowUpRight } from "lucide-react";
+import { resolveDesign, templateGallery } from "@/lib/poster-design";
 import { FestivalPoster } from "./festival-poster";
 import type { FestivalProject } from "@/lib/projects";
 
@@ -15,11 +16,12 @@ export function FestivalDashboard({ projects, onCreate, onOpen, onRename, onDupl
     {projects.length === 0 ? <section className="festival-empty"><span className="empty-icon"><Sparkles size={30}/></span><h2>The stage is yours.</h2><p>Start with a blank canvas or remix our sample lineup.<br/>Your next great festival starts right here.</p><button className="export-button" onClick={onCreate}><Plus size={16}/>Create your first festival</button></section> :
       <div className="festival-grid">{projects.map(project => {
         const { festival } = project;
+        const design = resolveDesign(festival.design, festival.palette);
         const count = festival.tiers.reduce((sum, tier) => sum + tier.artists.length, 0);
         const name = festival.name || "Untitled festival";
         return <article className="festival-card" key={project.id} aria-label={`${name} project`}>
           <button className="card-preview" aria-label={`Open ${name}`} onClick={() => onOpen(project.id)}><div aria-hidden="true"><FestivalPoster festival={festival}/></div><span className="open-overlay">Open in studio <ArrowUpRight size={16}/></span></button>
-          <div className="card-content"><div className="card-title"><h2>{name}</h2><span className="theme-label"><i className={`swatch-${festival.palette}`}/>{paletteNames[festival.palette]}</span></div>
+          <div className="card-content"><div className="card-title"><h2>{name}</h2><span className="theme-label"><i style={{ background: design.background.accent }}/>{festival.design ? templateGallery.find(template => template.id === design.template)?.name : paletteNames[festival.palette]}</span></div>
             <p className="card-date"><CalendarDays size={13}/>{festival.date || "Dates to be announced"}</p>
             <div className="card-footer"><span><Music2 size={13}/>{count} {count === 1 ? "artist" : "artists"}</span><div className="card-actions"><button className="icon-button" onClick={() => onRename(project)} aria-label={`Rename ${name}`} title="Rename festival"><Pencil size={14}/></button><button className="icon-button" onClick={() => onDuplicate(project)} aria-label={`Duplicate ${name}`} title="Duplicate festival"><Copy size={14}/></button><button className="icon-button delete-project" onClick={() => onDelete(project)} aria-label={`Delete ${name}`} title="Delete festival"><Trash2 size={14}/></button></div></div>
           </div>

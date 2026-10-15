@@ -1,23 +1,24 @@
 import type { Festival } from "@/lib/festival";
-import { forwardRef, useId } from "react";
+import { forwardRef, useId, type CSSProperties } from "react";
+import { PosterBackground } from "./poster-background";
+import { fontFamily, resolveDesign, titleSize, type TextGroup } from "@/lib/poster-design";
 
 export const FestivalPoster = forwardRef<HTMLDivElement, { festival: Festival }>(function FestivalPoster({ festival }, ref) {
   const orbitId = useId();
+  const design = resolveDesign(festival.design, festival.palette);
+  function typography(group: TextGroup, text: string): CSSProperties {
+    const value = design.typography[group];
+    return { fontFamily: fontFamily(value.font, text), letterSpacing: `${value.spacing}em`, lineHeight: value.lineHeight, textAlign: value.align };
+  }
+  const artistText = festival.tiers.flatMap(tier => tier.artists).join(" ");
   return (
-    <div ref={ref} className={`festival-poster palette-${festival.palette}`} aria-label={`${festival.name} festival poster`}>
-      <div className="poster-art" aria-hidden="true">
-        <div className="planet" />
-        <svg viewBox="0 0 600 800" preserveAspectRatio="none" className="orbital-lines">
-          <defs><linearGradient id={orbitId} x1="0" x2="1" y1="0" y2="1"><stop stopColor="#eeb4ff" stopOpacity=".1"/><stop offset=".5" stopColor="#f5bcff" stopOpacity=".75"/><stop offset="1" stopColor="#7448ff" stopOpacity=".05"/></linearGradient></defs>
-          {Array.from({ length: 22 }, (_, i) => <ellipse key={i} cx="300" cy={260 + i * 4} rx={155 + i * 11} ry={65 + i * 6} transform="rotate(-29 300 300)" fill="none" stroke={`url(#${orbitId})`} strokeWidth=".8" />)}
-        </svg>
-        <div className="poster-grain" />
-      </div>
-      <div className="poster-content">
+    <div ref={ref} className={`festival-poster advanced-poster palette-${festival.palette} template-${design.template}`} data-template={design.template} style={{ color: design.background.text, "--poster-bright": design.background.accent, "--poster-deep": design.background.start, "--poster-glow": design.background.accent, "--poster-end": design.background.end } as CSSProperties} aria-label={`${festival.name} festival poster`}>
+      <PosterBackground design={design} orbitId={orbitId}/>
+      <div className="poster-content" style={{ fontFamily: fontFamily("sans", `${festival.name} ${artistText} ${festival.tagline} ${festival.date} ${festival.location} ${design.template === "tokyo-nights" ? "東京" : ""}`) }}>
         <div className="poster-kicker"><span>AN EXPERIENCE BEYOND THE ORDINARY</span><span>✳</span></div>
-        <div className="poster-title-block"><div className="poster-edition">MUSIC · ART · CONNECTION</div><h2 style={{ fontSize: festival.name.length > 13 ? "2.9em" : festival.name.length > 9 ? "3.7em" : undefined }}>{festival.name || "YOUR FESTIVAL"}</h2><p>{festival.tagline}</p></div>
-        <div className="poster-lineup">{festival.tiers.map((tier, i) => <div key={tier.id} className={`poster-tier poster-tier-${Math.min(i, 2)}`}>{tier.artists.map((artist, index) => <span key={`${artist}-${index}`}>{artist}</span>)}</div>)}</div>
-        <div className="poster-bottom"><div className="poster-date">{festival.date}</div><div className="poster-location">{festival.location}</div><div className="poster-rule"/><div className="poster-foot"><span>FIND YOUR FREQUENCY.</span><span>MADE WITH ENCORE ↗</span></div></div>
+        <div className="poster-title-block"><div className="poster-edition">{design.template === "tokyo-nights" ? "東京 · MUSIC AFTER DARK" : design.template === "minimalist" ? "AN INDEPENDENT MUSIC GATHERING" : design.template === "retro-festival" ? "GOOD MUSIC · GOOD PEOPLE" : "MUSIC · ART · CONNECTION"}</div><h2 style={{ ...typography("title", festival.name), fontSize: `${titleSize(festival.name) * design.typography.title.size}cqw` }}>{festival.name || "YOUR FESTIVAL"}</h2><p style={{ ...typography("tagline", festival.tagline), fontSize: `${1.32 * design.typography.tagline.size}em` }}>{festival.tagline}</p></div>
+        <div className="poster-lineup">{festival.tiers.map((tier, i) => <div key={tier.id} className={`poster-tier poster-tier-${Math.min(i, 2)}`} style={{ ...typography("artists", artistText), fontSize: `${[2.28, 1.4, .94][Math.min(i, 2)] * design.typography.artists.size}em`, justifyContent: { left: "flex-start", center: "center", right: "flex-end" }[design.typography.artists.align] }}>{tier.artists.map((artist, index) => <span key={`${artist}-${index}`}>{artist}</span>)}</div>)}</div>
+        <div className="poster-bottom"><div className="poster-date" style={{ ...typography("details", festival.date), fontSize: `${1.6 * design.typography.details.size}em` }}>{festival.date}</div><div className="poster-location" style={{ ...typography("details", festival.location), fontSize: `${.76 * design.typography.details.size}em` }}>{festival.location}</div><div className="poster-rule"/><div className="poster-foot"><span>FIND YOUR FREQUENCY.</span><span>MADE WITH ENCORE ↗</span></div></div>
       </div>
     </div>
   );

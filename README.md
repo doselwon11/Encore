@@ -51,3 +51,23 @@ local to the browser and are not synced to other devices.
 Run `npm test` with Node.js 22.18+ to verify project creation, independent copies,
 migration, persistence, invalid data recovery, and storage failure handling.
 Run `npm run lint`, `npx tsc --noEmit`, and `npm run build` before publishing.
+
+## Advanced poster design studio
+
+Open a festival, then choose **Design**. Typography controls apply independently
+to the title, artists, tagline, and event details. Background controls include
+four colors, gradient direction, patterns, texture, glow, and decoration toggles.
+The template gallery offers Neon Waves, Tokyo Nights, Golden Hour, Minimalist,
+and Retro Festival, each with different artwork and layout. Applying a template
+requires confirmation and keeps festival details and artists intact.
+
+Design settings live inside each festival record. Older projects keep their
+palette and receive defaults only when rendered; opening them does not rewrite
+their saved design. Copies have independent settings. Long text wraps and the
+poster grows vertically when needed to keep large lineups visible.
+
+Poster fonts (Geist, Barlow Condensed, DM Serif Display, and Noto Sans JP) are
+bundled locally under `public/fonts`, with their SIL Open Font Licenses. PNG
+export waits for font loading, embeds the fonts, and uses the same poster DOM as
+the preview. The export dialog displays the actual generated bitmap and offers
+a download link if automatic downloading is blocked by the browser.
