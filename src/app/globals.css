@@ -164,3 +164,61 @@ dialog::backdrop { background: #07050ce8; backdrop-filter: blur(10px); }
 @media (min-width: 1051px) { .poster-content { min-height: 133.333cqw; } }
 @media (max-width: 760px) { .app-header { height: 65px; padding: 0 6%; gap: 15px; } .workspace-label, .header-divider, .studio-badge { display: none; } .main-shell { padding: 28px 5% 22px; } .page-heading { align-items: flex-start; gap: 15px; margin-bottom: 25px; } .eyebrow { font-size: 6px; letter-spacing: 1.2px; } h1 { font-size: 35px; } .page-heading p { font-size: 10px; max-width: 220px; line-height: 1.7; } .reset-button { font-size: 8px; padding: 8px; margin-top: 28px; flex-shrink: 0; } .workspace-grid { grid-template-columns: 1fr; gap: 25px; } .editor-body { padding: 23px 20px; min-height: 0; } .editor-panel { order: 0; } .two-fields { grid-template-columns: 1fr 1.1fr; } .sample-button span { display: inline; } .artist-chip { font-size: 8px; padding: 6px 7px; } .chips-2 .artist-chip { font-size: 7px; } .tier-name { font-size: 10px; } .section-caption p, .lineup-caption p { font-size: 10px; } .field { font-size: 11px; } .input-wrap input { font-size: 11px; } .two-fields input { font-size: 8px; } .poster-stage { padding: 25px 8% 17px; } .poster-content { min-height: 133.333cqw; } .preview-heading { margin-bottom: 8px; } .export-section { flex-wrap: nowrap; } .export-button { font-size: 10px; padding: 12px; } .page-footer { font-size: 7px; } .page-footer > span:last-child { display: none; } .editor-footer { font-size: 5px; } .save-state { font-size: 7px; } .canvas-caption { font-size: 5.5px; } }
 @media (prefers-reduced-motion: reduce) { *, *::before, *::after { transition: none !important; animation: none !important; scroll-behavior: auto !important; } }
+
+/* Festival project library */
+.brand-button { border: 0; background: transparent; padding: 0; }
+.back-to-festivals { display: inline-flex; align-items: center; gap: 8px; color: #bba4ce; border: 0; background: transparent; font-size: 11px; margin: -12px 0 27px; padding: 6px 0; }
+.back-to-festivals:hover { color: #e0c5ff; }
+.library-loading { min-height: 70vh; display: flex; align-items: center; justify-content: center; gap: 12px; color: #c1a6dc; }
+.storage-warning { padding: 13px 5%; background: #37233d; color: #f0c8eb; border-bottom: 1px solid #714878; font-size: 12px; line-height: 1.7; }
+.dashboard { min-height: calc(100vh - 77px); }
+.dashboard .page-heading { margin: 12px 0 40px; }
+.dashboard .page-heading > .export-button { font-size: 12px; padding: 13px 19px; }
+.library-heading { display: flex; justify-content: space-between; align-items: center; margin: 0 0 20px; color: #b4a3c1; }
+.library-heading > span { display: flex; gap: 9px; align-items: center; font-size: 12px; }
+.library-heading b { padding: 3px 7px; border-radius: 5px; background: #9a6bcb1a; font-size: 10px; font-weight: 500; }
+.library-heading small { font-size: 10px; color: #7c6c88; }
+.festival-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 23px; }
+.festival-card { min-width: 0; background: #17131d; border: 1px solid #34283e; border-radius: 12px; overflow: hidden; transition: border-color .2s, box-shadow .2s; }
+.festival-card:hover { border-color: #795397; box-shadow: 0 12px 35px #0003; }
+.card-preview { width: 100%; display: block; border: 0; background: radial-gradient(ellipse at 50% 20%,#613b7633,transparent), #211729; padding: 25px 18% 0; position: relative; overflow: hidden; height: 280px; text-align: initial; }
+.card-preview > div { box-shadow: 0 10px 30px #0005; pointer-events: none; }
+.card-preview .festival-poster { min-height: 0; }
+.open-overlay { position: absolute; bottom: 14px; left: 50%; transform: translateX(-50%); padding: 9px 12px; background: #20122ee8; border: 1px solid #c298de44; border-radius: 6px; display: flex; gap: 9px; align-items: center; white-space: nowrap; font-size: 10px; color: #e1c7f7; opacity: 0; transition: opacity .2s; }
+.card-preview:hover .open-overlay, .card-preview:focus-visible .open-overlay { opacity: 1; }
+.card-content { padding: 20px; border-top: 1px solid #38263f; }
+.card-title h2 { font-size: 17px; line-height: 1.4; font-weight: 600; overflow-wrap: anywhere; margin: 0 0 10px; }
+.theme-label { display: inline-flex; align-items: center; gap: 6px; font-size: 9px; color: #b598ce; }
+.theme-label i { height: 10px; width: 10px; border-radius: 50%; }
+.card-date { display: flex; gap: 7px; align-items: center; color: #9987a9; font-size: 10px; margin: 15px 0; overflow-wrap: anywhere; }
+.card-date svg { flex-shrink: 0; }
+.card-footer { display: flex; justify-content: space-between; align-items: center; gap: 7px; border-top: 1px solid #302336; padding-top: 13px; }
+.card-footer > span { display: flex; gap: 6px; align-items: center; font-size: 10px; color: #9d88af; }
+.card-actions { display: flex; gap: 7px; }
+.card-actions button { min-width: 32px; min-height: 32px; }
+.delete-project:hover { color: #f4a0c8; border-color: #9a506e; }
+.new-festival-card { min-height: 400px; border: 1px dashed #523460; border-radius: 12px; background: radial-gradient(ellipse at 50% 30%,#54277120,transparent); display: flex; align-items: center; justify-content: center; flex-direction: column; color: #b594d1; gap: 14px; }
+.new-festival-card > span, .empty-icon { display: grid; place-items: center; height: 52px; width: 52px; border-radius: 15px; border: 1px solid #8557a342; background: #a76ce41a; }
+.new-festival-card strong { font-size: 14px; font-weight: 500; }
+.new-festival-card small { font-size: 11px; color: #826c93; }
+.festival-empty { min-height: 430px; padding: 50px 20px; display: flex; align-items: center; justify-content: center; flex-direction: column; border: 1px dashed #4d315b; border-radius: 14px; background: radial-gradient(ellipse at 50% 25%,#6e367627,transparent 70%); text-align: center; }
+.festival-empty h2 { font-size: 27px; margin-top: 23px; letter-spacing: -.8px; }
+.festival-empty p { color: #a18bae; font-size: 12px; line-height: 1.9; margin: 17px 0 23px; }
+.festival-empty .export-button { font-size: 12px; }
+.project-dialog { position: fixed; }
+.project-dialog .project-dialog-close { position: absolute; top: 16px; right: 16px; }
+.project-dialog h2 { padding-right: 30px; }
+.project-dialog .dialog-actions { display: flex; justify-content: flex-end; gap: 10px; margin-top: 23px; }
+.danger-button { background: #663047; border: 1px solid #ad597c; border-radius: 7px; padding: 11px 14px; color: #ffe3ef; font-size: 11px; }
+.project-dialog .create-options { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.create-options button { padding: 21px 14px; border: 1px solid #563765; border-radius: 9px; background: #2c1c38; color: #d7b7f1; display: flex; flex-direction: column; align-items: flex-start; gap: 15px; text-align: left; }
+.create-options strong { font-size: 12px; font-weight: 550; }
+.create-options span { font-size: 10px; line-height: 1.8; color: #ae91c0; }
+@media (max-width: 1050px) { .festival-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 760px) { .dashboard .page-heading { flex-direction: column; margin-top: 8px; gap: 20px; } .dashboard .page-heading p { max-width: none; } .library-heading { align-items: flex-start; gap: 10px; } .library-heading small { font-size: 8px; padding-top: 3px; } .library-heading > span { font-size: 10px; } .festival-grid { gap: 18px; } .card-preview { height: 215px; padding: 18px 12% 0; } .card-content { padding: 14px; } .card-title h2 { font-size: 15px; } .card-actions { gap: 5px; } .new-festival-card { min-height: 350px; } .open-overlay { opacity: 1; } .back-to-festivals { margin-top: -5px; } }
+@media (max-width: 520px) { .festival-grid { grid-template-columns: 1fr; } .card-preview { height: 300px; padding: 25px 20% 0; } .card-content { padding: 20px; } .card-title h2 { font-size: 18px; } .card-actions button { min-width: 40px; min-height: 40px; } .new-festival-card { min-height: 210px; } .festival-empty { min-height: 390px; } }
+
+/* Keep every miniature poster visible, including its date and footer. */
+.card-preview { display: grid; place-items: center; padding: 20px; }
+.card-preview > div { width: min(100%, 180px); }
+@media (max-width: 760px) and (min-width: 521px) { .card-preview > div { width: min(100%, 130px); } }

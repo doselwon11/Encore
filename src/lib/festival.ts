@@ -13,5 +13,10 @@ export const initialFestival: Festival = {
 export function isFestival(value: unknown): value is Festival {
   if (!value || typeof value !== "object") return false;
   const f = value as Festival;
-  return [f.name, f.date, f.location, f.tagline].every(v => typeof v === "string") && ["ultraviolet", "sunset", "afterhours"].includes(f.palette) && Array.isArray(f.tiers) && f.tiers.length <= 8 && f.tiers.every(t => typeof t.id === "string" && typeof t.name === "string" && Array.isArray(t.artists) && t.artists.every(a => typeof a === "string"));
+  if (![f.name, f.date, f.location, f.tagline].every(v => typeof v === "string") || !["ultraviolet", "sunset", "afterhours"].includes(f.palette) || !Array.isArray(f.tiers) || f.tiers.length > 8) return false;
+  const ids = new Set<string>();
+  return f.tiers.every(t => {
+    if (!t || typeof t !== "object" || typeof t.id !== "string" || !t.id || ids.has(t.id) || typeof t.name !== "string" || !Array.isArray(t.artists) || !t.artists.every(a => typeof a === "string")) return false;
+    ids.add(t.id); return true;
+  });
 }

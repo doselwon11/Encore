@@ -1,5 +1,5 @@
-import { FestivalStudio } from "@/components/festival-studio";
+import { FestivalProjects } from "@/components/festival-projects";
 
 export default function Home() {
-  return <FestivalStudio />;
+  return <FestivalProjects />;
 }
