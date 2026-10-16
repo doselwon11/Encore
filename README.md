@@ -71,3 +71,32 @@ bundled locally under `public/fonts`, with their SIL Open Font Licenses. PNG
 export waits for font loading, embeds the fonts, and uses the same poster DOM as
 the preview. The export dialog displays the actual generated bitmap and offers
 a download link if automatic downloading is blocked by the browser.
+
+## Festival schedule builder
+
+The **Schedule** tab saves stages, festival dates, timezone labels and artist
+performances with each festival. Existing projects receive an empty schedule
+without changing their lineup, poster design, or saved data. Invalid schedule
+payloads remain untouched until explicitly replaced through a confirmation.
+
+Add stages and dates, then use **Assign / Add performance**, or drag artist
+handles onto a stage’s 15-minute slots. Drag existing performances to move them
+while preserving duration. Keyboard handles support Space, arrows, and Escape;
+the Edit form provides exact date/time/stage alternatives on desktop and mobile.
+
+Times are stored as explicit festival-local `YYYY-MM-DDTHH:mm` calendar values,
+not browser-local timestamps or UTC instants. **Ends next day** creates an
+explicit following-date end time. Overnight performances appear on both calendar
+dates, with an automatic continuation view after the last festival day. Changing
+the optional IANA timezone label does not shift the wall-clock schedule.
+
+Stage overlaps and simultaneous artist double-bookings are conflicts. Repeated
+non-overlapping bookings are review advisories, including sets on different
+days. Conflicts do not prevent planning; they appear in the editor and as draft
+markers in PNG exports. Touching end/start boundaries are permitted.
+
+Export the selected date or all dates as a high-resolution PNG with embedded
+fonts, all stage columns, and full performance details. Large schedules can be
+exported one day at a time. Stage/day/performance deletion requires confirmation.
+Run `npm test` for midnight, calendar boundaries, timezone independence, booking
+conflicts, project persistence, and poster-design regression coverage.

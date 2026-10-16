@@ -1,8 +1,9 @@
+import type { FestivalSchedule } from "./schedule.ts";
 import type { PosterDesign } from "./poster-design.ts";
 
 export type Palette = "ultraviolet" | "sunset" | "afterhours";
 export type Tier = { id: string; name: string; artists: string[] };
-export type Festival = { name: string; date: string; location: string; tagline: string; palette: Palette; tiers: Tier[]; design?: PosterDesign };
+export type Festival = { name: string; date: string; location: string; tagline: string; palette: Palette; tiers: Tier[]; design?: PosterDesign; schedule?: FestivalSchedule };
 export const initialFestival: Festival = {
   name: "AFTERGLOW", date: "AUGUST 22–24, 2026", location: "JOSHUA TREE, CALIFORNIA",
   tagline: "Three nights. Infinite possibilities.", palette: "ultraviolet",
