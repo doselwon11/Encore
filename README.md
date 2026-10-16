@@ -100,3 +100,20 @@ fonts, all stage columns, and full performance details. Large schedules can be
 exported one day at a time. Stage/day/performance deletion requires confirmation.
 Run `npm test` for midnight, calendar boundaries, timezone independence, booking
 conflicts, project persistence, and poster-design regression coverage.
+
+## Expanded template collection
+
+The Design → Templates gallery includes Japanese City Pop (coastal record sleeve),
+Brutalist (concrete flyer), Psychedelic (liquid eye), Editorial (numbered music
+journal), Cyber Rave (circuit terminal), and Botanical (herbarium invitation),
+alongside the original five templates. Thumbnails fit the entire sample poster;
+the labeled selector and thumbnail buttons both offer a confirmation before
+replacing a project's typography/background settings. Existing saved designs
+are never changed merely by opening the gallery.
+
+All six illustrations are original inline SVG/CSS. Text flows vertically for
+long titles and large lineups instead of being cropped to a fixed page height.
+PNG uses that same poster DOM, vector artwork, colors and embedded local fonts.
+Japanese and Korean select bundled Noto Sans fallbacks; Vietnamese serif text
+uses Noto Serif for complete diacritics. Added fonts are from Google Fonts under
+the SIL Open Font License; license files are in `public/fonts`.

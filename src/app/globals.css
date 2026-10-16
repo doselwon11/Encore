@@ -466,3 +466,97 @@ dialog::backdrop { background: #07050ce8; backdrop-filter: blur(10px); }
 .schedule-export-agenda span { color: #b69bc8; overflow-wrap: anywhere; }
 .schedule-export-agenda strong { font-weight: 600; overflow-wrap: anywhere; }
 .schedule-export-canvas .schedule-set-content strong { white-space: normal; overflow-wrap: anywhere; }
+
+/* Expanded poster collection: flowing text and original inline vector artwork. */
+@font-face { font-family: "Encore KR"; src: url("/fonts/EncoreKR.ttf") format("truetype"); font-weight: 100 900; font-display: swap; }
+.expanded-content { position: relative; min-height: 133.333cqw; padding: 6%; display: flex; flex-direction: column; gap: 4cqw; }
+.expanded-content > * { min-width: 0; }
+.composition-masthead { display: flex; justify-content: space-between; gap: 3cqw; font-size: 1.65cqw; line-height: 1.7; letter-spacing: .1em; border-bottom: 1px solid currentColor; padding-bottom: 2cqw; }
+.composition-masthead span { overflow-wrap: anywhere; }
+.composition-title h2 { margin: 0; font-weight: 800; overflow-wrap: anywhere; text-wrap: balance; padding-block: .12em; }
+.composition-title p { margin: 2cqw 0 0; overflow-wrap: anywhere; }
+.template-artwork { color: inherit; flex: 0 0 auto; }
+.template-artwork svg { display: block; width: 100%; height: auto; }
+.composition-lineup { display: flex; flex-direction: column; gap: 4cqw; }
+.composition-tier { min-width: 0; }
+.composition-tier-label { display: flex; gap: 1.5cqw; align-items: baseline; font-size: 1.7cqw; letter-spacing: .12em; margin-bottom: 1.8cqw; overflow-wrap: anywhere; }
+.composition-tier-label > span { opacity: .5; }
+.composition-artists { display: flex; flex-wrap: wrap; gap: .35em .65em; }
+.composition-artist { max-width: 100%; min-width: 0; overflow-wrap: anywhere; display: flex; align-items: baseline; gap: .45em; }
+.composition-artist > span { flex: 1; text-align: inherit; min-width: 0; overflow-wrap: anywhere; }
+.composition-artist small { font-size: .45em; flex-shrink: 0; opacity: .65; }
+.composition-footer { margin-top: auto; border-top: 1px solid currentColor; padding-top: 3cqw; }
+.composition-footer .poster-location { margin-top: 1cqw; letter-spacing: inherit; }
+.composition-colophon { display: flex; gap: 2cqw; justify-content: space-between; font-size: 1.4cqw; line-height: 1.8; letter-spacing: .07em; margin-top: 3cqw; }
+/* Record sleeve: a framed coastal illustration, compact sleeve title, inset track listing. */
+.template-japanese-city-pop .expanded-content { padding: 5%; gap: 3cqw; border: 2cqw solid var(--poster-deep); }
+.template-japanese-city-pop .composition-title { padding: 2cqw 0; }
+.template-japanese-city-pop .composition-art-plate { border: 1px solid currentColor; padding: 1.2cqw; }
+.template-japanese-city-pop .composition-lineup { padding: 3cqw; border-left: .8cqw solid var(--poster-bright); }
+.template-japanese-city-pop .composition-tier-0 .composition-artist { flex-basis: 100%; }
+.template-japanese-city-pop .composition-tier-label { color: var(--poster-bright); }
+/* Concrete flyer: dense type, hard blocks, alternating stripe rows, no ornamental frame. */
+.template-brutalist .expanded-content { padding: 4%; gap: 3cqw; }
+.template-brutalist .composition-masthead { border-bottom-width: 1.5cqw; font-weight: 800; }
+.template-brutalist .composition-title { border-bottom: 1.5cqw solid currentColor; padding-bottom: 3cqw; }
+.template-brutalist .composition-art-plate { width: 65%; align-self: flex-end; }
+.template-brutalist .composition-tier-label { font-weight: 800; border-bottom: 1px solid currentColor; }
+.template-brutalist .composition-tier-0 .composition-artists { display: block; }
+.template-brutalist .composition-tier-0 .composition-artist { padding: 1.2cqw 2cqw; background: var(--poster-bright); margin-bottom: 1cqw; font-weight: 900; }
+.template-brutalist .composition-tier-1 .composition-artist { border-bottom: 2px solid currentColor; }
+.template-brutalist .composition-footer { border-top-width: 1.5cqw; }
+/* Liquid eye: concentric curves, a centered bill, pill-shaped support bands. */
+.template-psychedelic .expanded-content { padding: 7%; border: 1.5cqw double var(--poster-bright); border-radius: 12cqw 12cqw 0 0; gap: 4cqw; }
+.template-psychedelic .composition-title h2 { font-style: italic; text-shadow: .3cqw .3cqw var(--poster-bright); }
+.template-psychedelic .composition-masthead { border: 0; justify-content: center; }
+.template-psychedelic .composition-masthead span:last-child { display: none; }
+.template-psychedelic .composition-tier-label { justify-content: center; }
+.template-psychedelic .composition-artists { justify-content: center; }
+.template-psychedelic .composition-tier-0 .composition-artist { flex-basis: 100%; justify-content: center; }
+.template-psychedelic .composition-tier-1 { border: 1px solid var(--poster-bright); border-radius: 5cqw; padding: 3cqw; }
+.template-psychedelic .composition-tier-2 .composition-artist { border-bottom: 1px solid var(--poster-bright); }
+.template-psychedelic .composition-footer { border-top: 3px double var(--poster-bright); }
+/* Magazine spread: title, an abstract print, a deck and numbered two-column artist index. */
+.template-editorial .expanded-content { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, .65fr); gap: 4cqw; }
+.template-editorial .composition-masthead, .template-editorial .composition-lineup, .template-editorial .composition-footer { grid-column: 1 / -1; }
+.template-editorial .composition-title { grid-column: 1 / -1; }
+.template-editorial .composition-art-plate { grid-column: 2; grid-row: 3; }
+.editorial-deck { grid-column: 1; grid-row: 3; display: flex; flex-direction: column; justify-content: space-between; font-size: 3.5cqw; line-height: 1.25; font-weight: 600; }
+.editorial-deck span:last-child { font-size: 2cqw; line-height: 1.6; font-weight: 400; }
+.template-editorial .composition-tier { display: grid; grid-template-columns: 14% minmax(0,1fr); border-top: 1px solid currentColor; padding-top: 2cqw; gap: 3cqw; }
+.template-editorial .composition-tier-label { display: flex; flex-direction: column; font-size: 1.4cqw; }
+.template-editorial .composition-tier-label > span { font-size: 4cqw; color: var(--poster-bright); opacity: 1; }
+.template-editorial .composition-artists { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: .55em; }
+.template-editorial .composition-artists .composition-artist { font-size: .8em; }
+/* Terminal: circuit plate, asymmetric headliner rail and segmented artist channels. */
+.template-cyber-rave .expanded-content { padding: 5%; border-left: 1.6cqw solid var(--poster-bright); }
+.template-cyber-rave .composition-masthead { color: var(--poster-bright); border-bottom-style: dashed; }
+.template-cyber-rave .composition-title { padding-left: 3cqw; border-left: 1px solid var(--poster-bright); }
+.template-cyber-rave .composition-title h2 { text-shadow: .25cqw .2cqw #27bda0; }
+.template-cyber-rave .composition-art-plate { border-block: 1px solid var(--poster-bright); }
+.template-cyber-rave .composition-tier-label { background: var(--poster-bright); color: var(--poster-end); padding: 1cqw; font-weight: 700; }
+.template-cyber-rave .composition-tier-0 .composition-artists { flex-direction: column; }
+.template-cyber-rave .composition-tier-1 .composition-artists, .template-cyber-rave .composition-tier-2 .composition-artists { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); }
+.template-cyber-rave .composition-artist { border-bottom: 1px dashed var(--poster-bright); padding-bottom: .2em; }
+.template-cyber-rave .composition-footer { border-top: .6cqw solid var(--poster-bright); }
+/* Herbarium: botanical plate, centered invitation, paired specimen labels. */
+.template-botanical .expanded-content { margin: 3%; min-height: 125.333cqw; padding: 5%; border: 1px solid var(--poster-bright); gap: 3cqw; }
+.template-botanical .composition-masthead { font-size: 1.4cqw; border: 0; }
+.template-botanical .composition-art-plate { width: 85%; align-self: center; }
+.template-botanical .composition-title { order: 2; padding-block: 1cqw 4cqw; border-bottom: 1px solid var(--poster-bright); }
+.template-botanical .composition-lineup { order: 3; }
+.template-botanical .composition-footer { order: 4; }
+.template-botanical .composition-tier-label { justify-content: center; font-style: italic; letter-spacing: .05em; }
+.template-botanical .composition-tier-label > span { display: none; }
+.template-botanical .composition-artists { justify-content: center; }
+.template-botanical .composition-tier-0 .composition-artist { flex-basis: 100%; justify-content: center; }
+.template-botanical .composition-tier-1 .composition-artist { border-bottom: 1px solid var(--poster-bright); padding: .2em; }
+.template-botanical .composition-tier-2 .composition-artists { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); }
+.template-botanical .composition-tier-2 .composition-artist { justify-content: center; }
+.template-card:focus-visible { outline: 2px solid #d7b5ff; outline-offset: 3px; }
+
+@font-face { font-family: "Encore Viet Serif"; src: url("/fonts/EncoreVietSerif.ttf") format("truetype"); font-weight: 100 900; font-display: swap; }
+
+.template-thumbnail { position: relative; }
+.template-thumbnail-scaler { width: 100%; transform-origin: top center; }
+.composition-art-plate { flex: 0 0 auto; }

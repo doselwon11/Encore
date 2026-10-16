@@ -7,10 +7,16 @@ export const fontPresets = {
 export type FontPreset = keyof typeof fontPresets;
 export type TextGroup = "title" | "artists" | "tagline" | "details";
 export type TypographyStyle = { font: FontPreset; size: number; spacing: number; lineHeight: number; align: "left" | "center" | "right" };
-export type TemplateId = "neon-waves" | "tokyo-nights" | "golden-hour" | "minimalist" | "retro-festival";
+export type TemplateId = "neon-waves" | "tokyo-nights" | "golden-hour" | "minimalist" | "retro-festival" | "japanese-city-pop" | "brutalist" | "psychedelic" | "editorial" | "cyber-rave" | "botanical";
 export type BackgroundDesign = { start: string; end: string; accent: string; text: string; angle: number; pattern: "waves" | "grid" | "dots" | "none"; patternOpacity: number; lineOpacity: number; glow: number; grain: number; decorations: boolean };
 export type PosterDesign = { template: TemplateId; typography: Record<TextGroup, TypographyStyle>; background: BackgroundDesign };
 export const templateGallery: { id: TemplateId; name: string; description: string }[] = [
+  { id: "japanese-city-pop", name: "Japanese City Pop", description: "Coastal record sleeve · sunset & palms." },
+  { id: "brutalist", name: "Brutalist", description: "Raw concrete · oversized type & blocks." },
+  { id: "psychedelic", name: "Psychedelic", description: "Liquid portals · a kaleidoscopic bill." },
+  { id: "editorial", name: "Editorial", description: "A music journal · numbered artist columns." },
+  { id: "cyber-rave", name: "Cyber Rave", description: "Terminal typography · circuit-board energy." },
+  { id: "botanical", name: "Botanical", description: "A garden gathering · illustrated herbarium." },
   { id: "neon-waves", name: "Neon Waves", description: "Orbital motion. Electric energy." },
   { id: "tokyo-nights", name: "Tokyo Nights", description: "Neon skyline & city-pop rhythm." },
   { id: "golden-hour", name: "Golden Hour", description: "A sun-soaked desert horizon." },
@@ -62,9 +68,10 @@ export function resolveDesign(value?: unknown, palette: keyof typeof colorPalett
   return defaults;
 }
 export function fontFamily(font: FontPreset, text: string): string {
-  const family = fontPresets[font].family;
-  // Embed the bundled Japanese fallback when text needs it, without bloating Latin-only exports.
-  return font !== "japanese" && /[\u2e80-\u9fff\uac00-\ud7af\uf900-\ufaff\u3040-\u30ff]/u.test(text) ? family.replace(/, (?:sans-serif|serif)$/, ', "Encore JP", sans-serif') : family;
+  const family = font === "serif" && /[\u0102-\u0103\u0110-\u0111\u01a0-\u01b0\u1ea0-\u1ef9]/u.test(text.normalize("NFC")) ? '"Encore Viet Serif", serif' : fontPresets[font].family;
+  // Only include the bundled script fallbacks needed by this text in PNGs.
+  const fallback = [/[\u1100-\u11ff\u3130-\u318f\uac00-\ud7af]/u.test(text) ? '"Encore KR"' : "", /[\u2e80-\u9fff\uf900-\ufaff\u3040-\u30ff]/u.test(text) && font !== "japanese" ? '"Encore JP"' : ""].filter(Boolean);
+  return fallback.length ? family.replace(/, (?:sans-serif|serif)$/, `, ${fallback.join(", ")}, sans-serif`) : family;
 }
 export function titleSize(text: string): number {
   const units = Array.from(text).reduce((sum, character) => sum + (/[^\u0000-\u024f]/u.test(character) ? 1 : .55), 0);
@@ -92,5 +99,23 @@ export function templateDesign(id: TemplateId): PosterDesign {
     design.typography.title = { ...design.typography.title, font: "serif", size: 1.1, spacing: -.045 };
     design.typography.artists.font = "display"; design.typography.tagline.font = "serif";
   }
+  const expanded = expandedPresets[id];
+  if (expanded) {
+    design.background = { ...design.background, ...expanded.colors, pattern: "none", glow: 0, grain: .04, lineOpacity: .65 };
+    design.typography.title = { ...design.typography.title, font: expanded.title, align: expanded.align, lineHeight: 1.15, spacing: -.025, size: .9 };
+    design.typography.artists = { ...design.typography.artists, font: expanded.artists, align: expanded.align, lineHeight: 1.5, size: .9 };
+    design.typography.tagline = { ...design.typography.tagline, font: expanded.tagline, align: expanded.align };
+    design.typography.details = { ...design.typography.details, align: expanded.align, spacing: .05 };
+  }
   return design;
 }
+
+const expandedPresets: Partial<Record<TemplateId, { title: FontPreset; artists: FontPreset; tagline: FontPreset; align: TypographyStyle["align"]; colors: Pick<BackgroundDesign, "start" | "end" | "accent" | "text"> }>> = {
+  "japanese-city-pop": { title: "japanese", artists: "sans", tagline: "serif", align: "left", colors: { start: "#f7c9bb", end: "#f9ead4", accent: "#dc496c", text: "#253d61" } },
+  brutalist: { title: "display", artists: "sans", tagline: "sans", align: "left", colors: { start: "#d5d4c9", end: "#eeeeea", accent: "#f14824", text: "#171717" } },
+  psychedelic: { title: "serif", artists: "display", tagline: "serif", align: "center", colors: { start: "#38205a", end: "#211037", accent: "#e8a966", text: "#fff0bd" } },
+  editorial: { title: "serif", artists: "sans", tagline: "serif", align: "left", colors: { start: "#f4eada", end: "#e9dec9", accent: "#a22f36", text: "#29241e" } },
+  "cyber-rave": { title: "display", artists: "display", tagline: "sans", align: "left", colors: { start: "#071d21", end: "#020b0e", accent: "#baff44", text: "#d3f3e9" } },
+  botanical: { title: "serif", artists: "serif", tagline: "sans", align: "center", colors: { start: "#eef0dc", end: "#d9e1bf", accent: "#567348", text: "#263c2d" } },
+};
+export const expandedTemplateIds = Object.keys(expandedPresets) as TemplateId[];

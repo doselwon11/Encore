@@ -57,10 +57,10 @@ test("background input is constrained to safe colors and bounded controls", () =
   assert.equal(design.background.pattern, "waves");
 });
 
-test("all five template presets are independent, normalized, and preserve custom settings", () => {
-  assert.equal(templateGallery.length, 5);
+test("all eleven template presets are independent, normalized, and preserve custom settings", () => {
+  assert.equal(templateGallery.length, 11);
   const presets = templateGallery.map(template => templateDesign(template.id));
-  assert.equal(new Set(presets.map(preset => preset.template)).size, 5);
+  assert.equal(new Set(presets.map(preset => preset.template)).size, 11);
   for (const preset of presets) assert.deepEqual(resolveDesign(preset), preset);
   const custom = templateDesign("tokyo-nights");
   custom.background.glow = .17; custom.typography.tagline.spacing = .1;
@@ -68,4 +68,26 @@ test("all five template presets are independent, normalized, and preserve custom
   assert.deepEqual(resolveDesign(custom, "sunset"), snapshot);
   assert.deepEqual(custom, snapshot);
   assert.notDeepEqual(templateDesign("tokyo-nights"), custom);
+});
+
+test("expanded template IDs preserve saved designs and include each requested composition", () => {
+  for (const id of ["japanese-city-pop", "brutalist", "psychedelic", "editorial", "cyber-rave", "botanical"] as const) {
+    const design = templateDesign(id);
+    design.typography.title.size = 1.32;
+    design.background.accent = "#123456";
+    assert.deepEqual(resolveDesign(design), design);
+    const project = createProject("sample"); project.festival.design = design;
+    const values = new Map<string, string>();
+    const storage = { getItem: (key: string) => values.get(key) ?? null, setItem: (key: string,value: string) => { values.set(key,value); } };
+    const store = { version: 1 as const, activeProjectId: project.id, projects: [project] };
+    assert.ok(saveProjects(storage,store)); assert.deepEqual(loadProjects(storage).store,store);
+  }
+});
+test("multilingual families use bundled Korean and Japanese fallbacks and retain Latin fonts", () => {
+  assert.match(fontFamily("serif", "서울 음악 축제"), /Encore KR/);
+  assert.match(fontFamily("japanese", "東京 서울"), /Encore KR/);
+  assert.match(fontFamily("display", "東京 서울"), /Encore JP/);
+  assert.match(fontFamily("sans", "Lễ hội âm nhạc Việt Nam"), /Encore Sans/);
+  assert.doesNotMatch(fontFamily("sans", "ENCORE"), /Encore KR/);
+  assert.match(fontFamily("serif", "Lễ hội".normalize("NFD")), /Encore Viet Serif/);
 });

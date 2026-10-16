@@ -50,7 +50,7 @@ export function FestivalStudio({ festival, saved, onChange, onBack }: { festival
       const { toCanvas, getFontEmbedCSS } = await import("html-to-image");
       const node = posterRef.current;
       if (!node) return;
-      const textNodes = [node, ...Array.from(node.querySelectorAll<HTMLElement>("h2, p, .poster-tier, .poster-date, .poster-location, .poster-edition"))];
+      const textNodes = [node, ...Array.from(node.querySelectorAll<HTMLElement>("h2, p, .poster-tier, .poster-date, .poster-location, .poster-edition, .composition-artists, .composition-masthead"))];
       await Promise.all(textNodes.map(element => {
         const style = getComputedStyle(element);
         return document.fonts.load(`${style.fontWeight} ${style.fontSize} ${style.fontFamily}`, element.textContent || "Encore");
