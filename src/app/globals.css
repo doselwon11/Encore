@@ -640,3 +640,41 @@ dialog::backdrop { background: #07050ce8; backdrop-filter: blur(10px); }
 .social-preview-viewport { margin-inline: auto; }
 .social-export-preview { position: sticky; top: 0; }
 @media(max-width:760px) { .social-export-preview { position: static; } }
+
+/* AI Create: drafts are separate from the saved festival collection. */
+.dashboard-create-actions { display: flex; gap: 12px; align-items: center; }
+.ai-create-trigger { border-color: #8057ab; background: linear-gradient(120deg,#392246,#241933); color: #e1c3ff; }
+.create-options .ai-create-option { grid-column: 1 / -1; background: linear-gradient(130deg,#493062,#32213f); border-color: #9d70bd; }
+.ai-brief-shell { max-width: 960px; }
+.ai-hero { margin-bottom: 28px; }
+.ai-hero h1 { font-size: clamp(36px,6vw,58px); line-height: 1.1; letter-spacing: -2px; margin: 22px 0 18px; }
+.ai-hero h1 span { font-family: Georgia,serif; font-weight: 400; font-style: italic; color: #cca2ee; }
+.ai-hero > p { color: #ab93be; line-height: 1.8; font-size: 13px; max-width: 530px; }
+.ai-fiction-notice { display: flex; gap: 10px; align-items: center; border: 1px solid #67457b; padding: 12px 15px; border-radius: 8px; color: #d4b7e7; background: #2b1a36; font-size: 11px; line-height: 1.7; margin-top: 20px; }
+.ai-fiction-notice svg { flex-shrink: 0; }
+.ai-brief-form { background: radial-gradient(ellipse at 100% 0,#512b6829,transparent 45%),#18131f; border: 1px solid #3f2d4a; border-radius: 14px; padding: 28px; }
+.ai-brief-form fieldset { border: 0; padding: 0; display: flex; flex-direction: column; gap: 21px; }
+.ai-brief-form legend { font-size: 17px; font-weight: 550; padding: 0 0 23px; }
+.ai-brief-form .field { gap: 9px; font-size: 12px; }
+.ai-brief-form textarea { resize: vertical; width: 100%; border: 1px solid #4b345c; background: #22192c; color: #e4d5ed; padding: 12px; border-radius: 6px; font-family: inherit; line-height: 1.7; font-size: 12px; }
+.ai-brief-form input, .ai-brief-form select { font-size: 12px; min-height: 42px; }
+.ai-brief-form textarea:focus-visible, .ai-brief-form input:focus-visible, .ai-brief-form select:focus-visible { outline: 2px solid #b68de5; outline-offset: 2px; }
+.ai-field-grid { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 18px; }
+.ai-field-grid > * { min-width: 0; }
+.ai-form-actions { display: flex; align-items: center; justify-content: space-between; gap: 15px; padding-top: 24px; border-top: 1px solid #37273f; margin-top: 25px; }
+.ai-form-actions > span { color: #9b85ad; font-size: 11px; }
+.ai-form-actions .export-button { margin: 0; }
+.ai-error { color: #ffd0df; border: 1px solid #98576e; background: #422334; padding: 15px; border-radius: 8px; margin-top: 20px; font-size: 12px; line-height: 1.8; }
+.ai-loading { display: flex; gap: 15px; align-items: center; color: #dbc0f1; padding: 18px; border: 1px solid #694584; background: #342044; border-radius: 8px; margin-top: 20px; }
+.ai-loading span { display: block; margin-top: 6px; color: #ad93c1; font-size: 11px; line-height: 1.6; }
+.ai-loading strong { font-size: 13px; font-weight: 500; }
+.ai-review-bar { position: sticky; top: 0; z-index: 10; padding: 16px 5%; display: flex; gap: 15px; align-items: center; background: #24172ff5; border-bottom: 1px solid #80569a; backdrop-filter: blur(15px); }
+.ai-review-bar > div { flex: 1; }
+.ai-review-bar strong { display: flex; align-items: center; gap: 8px; color: #e5ccfa; font-size: 13px; }
+.ai-review-bar span { display: block; color: #b69acb; font-size: 10px; line-height: 1.7; margin-top: 6px; }
+.ai-review-bar .export-button { margin: 0; }
+.studio-concept-notice { margin: 0 0 24px; }
+.concept-card-label { color: #c8a3df; font-size: 8px; letter-spacing: .04em; line-height: 1.7; margin-top: 13px; }
+.concept-poster-label { font-size: 1.35cqw; text-align: center; line-height: 1.8; letter-spacing: .04em; margin-top: 2cqw; overflow-wrap: anywhere; }
+.social-poster .concept-poster-label { font-size: calc(1.35cqw * var(--social-density)); margin-top: calc(20px * var(--social-density)); }
+@media(max-width:760px) { .dashboard-create-actions { width: 100%; }.dashboard-create-actions button { flex: 1; justify-content: center; }.ai-hero h1 { letter-spacing: -1.2px; }.ai-brief-form { padding: 21px 16px; }.ai-field-grid { gap: 15px; }.ai-form-actions { flex-wrap: wrap; }.ai-form-actions .export-button { width: 100%; justify-content: center; }.ai-review-bar { flex-wrap: wrap; gap: 10px; padding: 13px 5%; }.ai-review-bar > div { flex-basis: 100%; }.ai-review-bar > button { flex: 1; justify-content: center; }.ai-review-bar span { font-size: 9px; } }

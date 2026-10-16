@@ -133,3 +133,77 @@ Story reserves 250 pixels at the top/bottom and 60 pixels at each side for
 content. Safe-area guides are preview overlays and are never exported.
 Format changes and export filenames do not modify a saved festival's design.
 A download-again link is provided after rendering if automatic download is blocked.
+
+## AI Festival Lineup Creator
+
+Choose **AI Create** in My Festivals (or in New festival). Enter genres, favorite
+artists, location, first date, length (1–7 days), lineup size (6–24 artists), visual
+style, optional output language, and an optional schedule. Briefs can use English,
+Japanese, Korean, Vietnamese, or other supported model languages.
+
+Generation opens an **unsaved review** with the normal editor, design studio,
+lineup controls, schedule builder, and poster preview. Only **Save as new
+festival** writes the draft to the project library. Existing projects are never
+replaced. Leaving a generated review or returning to the brief asks before
+throwing away preview edits. Fictional-concept labels persist in the library,
+editor, poster PNGs/social exports, and schedule exports. Artists are suggestions,
+not confirmed bookings, endorsements, or statements about availability.
+
+### Server configuration
+
+Use Node.js 22 or newer (required by the installed OpenAI SDK).
+
+1. Copy `.env.example` to `.env.local` (already ignored by Git).
+2. Set `OPENAI_API_KEY` locally or in the deployment's secret settings. Never use
+   a `NEXT_PUBLIC_` variable, paste the key into the app, or commit credentials.
+3. Set `AI_CREATE_ENABLED=true`. Without both this flag and a key, the endpoint
+   returns a safe 503 response; other Encore features still work.
+4. Optionally set server-only `OPENAI_MODEL` (default `gpt-4.1-mini`, which must be
+   accessible to your API project) and restart Next.js.
+5. For deployment, set `APP_ORIGIN` to the exact browser origin, without a trailing
+   slash, and configure the public-deployment protections below before enabling.
+
+`POST /api/ai/festival` uses the official OpenAI SDK's Responses API with strict
+Zod structured output, a second semantic validation pass, `store:false`, no tools,
+a 4,000 output-token cap, and zero automatic retries. Only the submitted brief is
+sent; existing saved festivals and localStorage are not uploaded. Optional
+schedules require every artist exactly once, valid local dates, valid stages,
+positive durations, and no overlaps, including midnight continuations. Invalid,
+refused, incomplete, or failed responses cannot become saved projects. Error
+responses never expose provider details or credentials. Application code does
+not log briefs or model responses; consult OpenAI's API data policies for
+provider-side handling. See the [official Structured Outputs guide](https://developers.openai.com/api/docs/guides/structured-outputs).
+
+### Abuse and cost controls — public deployment requirements
+
+The starter endpoint accepts same-origin JSON POSTs only, rejects bodies above
+16 KB (including chunked bodies), bounds every input field, limits upload time to
+5 seconds, SDK time to 45 seconds, route generation to 50 seconds, and browser
+waiting to 60 seconds. Cancellation aborts the upstream request when possible;
+a request already processed may still incur usage. SDK errors are sanitized.
+
+A signed HttpOnly/SameSite cookie identifies a browser session. Per **server
+process**, limits are 3 attempts per session per 10 minutes, at most 2 concurrent
+requests (1 per session), 20 attempts per hour and 100 per day globally. Failed
+attempts consume quota. Session storage is bounded. Output tokens and lineup
+size are capped, and clients cannot select arbitrary models or generation limits.
+
+**These in-memory limits are a starter safeguard, not sufficient protection for
+an unauthenticated public AI endpoint.** They reset on process restart, do not
+coordinate between workers/regions, and clearing cookies bypasses the per-session
+limit. Before enabling publicly, require authentication, use shared atomic
+Redis/database limits keyed by verified user and trusted edge IP (do not trust
+arbitrary forwarded-IP headers), enforce global tenant budgets/concurrency and
+request-size/time limits at the gateway, add bot challenges as appropriate, and
+set API-project spend limits/alerts. Protect access to the API key. Use shared
+limits that fail closed; keep `AI_CREATE_ENABLED=false` until these controls are
+configured. A custom higher-cost `OPENAI_MODEL` changes the cost of each request.
+
+### AI verification
+
+`npm test` covers multilingual briefs, strict SDK requests, invalid inputs,
+CSRF/content-type/body limits, missing configuration, sanitized failures,
+refusals, incomplete responses, timeouts/abort, session signatures, concurrency
+and request budgets, invalid/overlapping midnight schedules, and the isolated
+preview → edit → save → reload workflow. Provider responses are mocked in tests;
+no API credential or paid OpenAI call is required to run validation.

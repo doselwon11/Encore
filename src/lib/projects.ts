@@ -82,3 +82,10 @@ export function loadProjects(storage: StorageAccess): { store: ProjectStore; wri
 export function saveProjects(storage: StorageAccess, store: ProjectStore): boolean {
   try { storage.setItem(PROJECTS_KEY, JSON.stringify(store)); return true; } catch { return false; }
 }
+
+// A reviewed AI draft is always a new project; existing IDs and data are untouched.
+export function addAiProject(store: ProjectStore, festival: Festival): ProjectStore {
+  if (!isFestival(festival) || !festival.name.trim() || festival.concept?.source !== "ai" || festival.concept.fictional !== true) throw new Error("Review a valid fictional festival before saving.");
+  const project = { ...createProject("blank"), festival: structuredClone(festival) };
+  return { ...store, projects: [project, ...store.projects], activeProjectId: project.id };
+}
