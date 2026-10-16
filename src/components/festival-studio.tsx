@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
+import { SocialExportStudio } from "./social-export-studio";
 import { ScheduleBuilder } from "./schedule-builder";
 import { PosterDesignStudio } from "./poster-design-studio";
 import { resolveDesign, colorPalettes, templateGallery } from "@/lib/poster-design";
@@ -18,6 +19,7 @@ function Field({ label, value, onChange, placeholder, icon: Icon, maxLength = 80
 }
 
 export function FestivalStudio({ festival, saved, onChange, onBack }: { festival: Festival; saved: boolean; onChange: (festival: Festival) => void; onBack: () => void }) {
+  const [socialExportOpen, setSocialExportOpen] = useState(false);
   const [activeTab, setActiveTab] = useState("Festival");
   const [exported, setExported] = useState<{ url: string; name: string; width: number; height: number } | null>(null);
   const [exporting, setExporting] = useState(false);
@@ -87,10 +89,11 @@ export function FestivalStudio({ festival, saved, onChange, onBack }: { festival
           const palette = e.target.value as PaletteName;
           const design = resolveDesign(festival.design, festival.palette), colors = colorPalettes[palette];
           update({ ...festival, palette, design: { ...design, background: { ...design.background, start: colors.start, end: colors.end, accent: colors.accent, text: colors.text } } });
-        }}><option disabled value="custom">{templateGallery.find(template => template.id === currentDesign.template)?.name} / Custom</option>{palettes.map(p => <option key={p.id} value={p.id}>{p.name}</option>)}</select><ChevronDown size={13}/></div><span className="preview-scale">FIT TO CANVAS</span><button className="icon-button" onClick={() => setExpanded(true)} aria-label="View full-size poster"><Expand size={14}/></button></div><div className="export-section"><div><h3>Looks like a sellout.</h3><p>Take your festival out into the world.</p></div><button className="export-button" onClick={exportPoster} disabled={exporting}>{exporting ? <LoaderCircle size={16} className="animate-spin"/> : <ArrowDownToLine size={16}/>}<span>{exporting ? "Exporting…" : "Export poster"}</span><ArrowUpRight size={15}/></button></div><div className="export-note"><span>PNG FORMAT</span><span>HIGH QUALITY</span><span>ALL YOURS</span></div></section>}
+        }}><option disabled value="custom">{templateGallery.find(template => template.id === currentDesign.template)?.name} / Custom</option>{palettes.map(p => <option key={p.id} value={p.id}>{p.name}</option>)}</select><ChevronDown size={13}/></div><span className="preview-scale">FIT TO CANVAS</span><button className="icon-button" onClick={() => setExpanded(true)} aria-label="View full-size poster"><Expand size={14}/></button></div><div className="export-section"><div><h3>Looks like a sellout.</h3><p>Take your festival out into the world.</p></div><button className="export-button" onClick={exportPoster} disabled={exporting}>{exporting ? <LoaderCircle size={16} className="animate-spin"/> : <ArrowDownToLine size={16}/>}<span>{exporting ? "Exporting…" : "Export poster"}</span><ArrowUpRight size={15}/></button></div><button className="secondary-button social-studio-trigger" onClick={() => setSocialExportOpen(true)}><Expand size={14}/>Social Media Export Studio<ArrowUpRight size={14}/></button><div className="export-note"><span>PNG FORMAT</span><span>HIGH QUALITY</span><span>ALL YOURS</span></div></section>}
       </div>
       <footer className="page-footer"><span><Disc3 size={14}/> Made for the love of live music.</span><span>A little imagination. A lot of encore.<Sparkles size={12}/></span></footer>
     </main>
+    {socialExportOpen && <SocialExportStudio festival={festival} onClose={() => setSocialExportOpen(false)}/>}
     {exported && <ProjectDialog title="Your poster is ready" onClose={() => setExported(null)}><p>This is your exported PNG, with the poster fonts embedded before rendering.</p><Image className="exported-poster" unoptimized src={exported.url} alt="Exported festival poster PNG" width={exported.width} height={exported.height}/><div className="dialog-actions"><button className="secondary-button" onClick={() => setExported(null)}>Keep creating</button><a className="export-button" download={exported.name} href={exported.url}><ArrowDownToLine size={14}/>Download PNG</a></div></ProjectDialog>}
     {notice && <div className="toast" role="status"><Check size={16}/>{notice}<button onClick={() => setNotice("")} aria-label="Dismiss notification"><X size={14}/></button></div>}
     <dialog ref={modalRef} className="preview-dialog" onCancel={() => setExpanded(false)} onClick={e => { if (e.target === e.currentTarget) setExpanded(false); }}><button className="dialog-close icon-button" aria-label="Close full-size preview" onClick={() => setExpanded(false)}><X size={20}/></button><FestivalPoster festival={festival}/></dialog>

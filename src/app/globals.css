@@ -560,3 +560,83 @@ dialog::backdrop { background: #07050ce8; backdrop-filter: blur(10px); }
 .template-thumbnail { position: relative; }
 .template-thumbnail-scaler { width: 100%; transform-origin: top center; }
 .composition-art-plate { flex: 0 0 auto; }
+
+/* Social canvases use native pixel dimensions. Only the editor thumbnail is zoomed. */
+.social-studio-trigger { margin: 0 0 16px; width: 100%; justify-content: center; }
+.project-dialog:has(.social-export-studio) { width: min(1080px, 94vw); max-width: 1080px; padding: 30px; }
+.social-export-studio { display: grid; grid-template-columns: minmax(0, .9fr) minmax(0, 1fr); gap: 32px; text-align: left; }
+.social-export-controls { min-width: 0; display: flex; flex-direction: column; gap: 17px; }
+.social-export-controls > p { margin: 0; line-height: 1.7; }
+.social-format-options { border: 0; padding: 0; display: flex; flex-direction: column; gap: 8px; }
+.social-format-options legend { color: #dbc5ee; font-size: 12px; margin-bottom: 12px; }
+.social-format-option { border: 1px solid #493552; border-radius: 8px; padding: 13px; display: flex; gap: 11px; align-items: center; cursor: pointer; background: #1c1425; }
+.social-format-option.selected { background: #3a2350; border-color: #b787e0; }
+.social-format-option input { accent-color: #c598fa; flex-shrink: 0; }
+.social-format-option > span { min-width: 0; flex: 1; }
+.social-format-option strong { display: block; font-size: 12px; color: #eadcf7; }
+.social-format-option small { display: block; font-size: 10px; color: #b49bc6; margin-top: 5px; line-height: 1.5; }
+.social-format-option > svg { color: #cea0f2; }
+.social-format-option:focus-within { outline: 2px solid #cfb0f9; outline-offset: 2px; }
+.social-export-controls .field { gap: 9px; }
+.social-filename { font-size: 9px; line-height: 1.7; color: #a88ebc; overflow-wrap: anywhere; }
+.social-export-controls .export-button { width: 100%; margin: 0; justify-content: center; }
+.social-export-status, .social-export-notice { color: #cdb0e3; background: #2a1d37; padding: 12px; font-size: 11px; line-height: 1.6; border-radius: 6px; overflow-wrap: anywhere; }
+.social-export-notice { border: 1px solid #71518b; }
+.social-export-preview { min-width: 0; align-self: start; padding: 16px; border: 1px solid #3c2c48; border-radius: 10px; background: #110d18; }
+.social-preview-caption { display: flex; justify-content: space-between; font-size: 9px; color: #ac91bf; margin-bottom: 14px; letter-spacing: .08em; }
+.social-export-preview > p { font-size: 9px; text-align: center; line-height: 1.6; color: #9f88af; margin: 14px 0 0; }
+.social-preview-viewport { position: relative; width: 100%; overflow: hidden; box-shadow: 0 12px 30px #0004; }
+.social-preview-transform { position: absolute; top: 0; left: 0; transform-origin: top left; }
+.social-safe-guide { position: absolute; border: 2px dashed #e777d5; pointer-events: none; z-index: 5; }
+.social-safe-guide > span { position: absolute; top: -25px; left: -2px; padding: 3px 6px; background: #32163c; color: #fff; font-size: 15px; letter-spacing: .05em; }
+.social-poster { aspect-ratio: auto; max-width: none; flex: none; }
+.social-safe-area { position: absolute; top: var(--social-top); bottom: var(--social-bottom); left: var(--social-side); right: var(--social-side); }
+.social-poster .social-safe-area > :is(.poster-content,.expanded-content) { min-height: 100%; margin: 0; padding: calc(25px * var(--social-density)); box-sizing: border-box; }
+.social-poster .poster-content { font-size: 2.1cqw; }
+.social-poster .poster-title-block { padding: calc(55px * var(--social-density)) 0 calc(15px * var(--social-density)); }
+.social-poster .poster-kicker { font-size: calc(1.45cqw * var(--social-density)); line-height: 1.6; gap: 20px; }
+.social-poster .poster-edition { font-size: calc(1.4cqw * var(--social-density)); margin-bottom: calc(20px * var(--social-density)); line-height: 1.6; }
+.social-poster .poster-lineup { margin-top: calc(60px * var(--social-density)); gap: calc(30px * var(--social-density)); padding: calc(15px * var(--social-density)); }
+.social-poster .poster-bottom { padding: calc(35px * var(--social-density)) calc(10px * var(--social-density)) 0; margin-top: auto; }
+.social-poster .poster-rule { margin: calc(30px * var(--social-density)) 0 calc(18px * var(--social-density)); }
+.social-poster .poster-foot { font-size: calc(1.1cqw * var(--social-density)); gap: 15px; line-height: 1.6; }
+.social-poster.template-tokyo-nights .poster-lineup { margin-top: calc(120px * var(--social-density)); }
+.social-poster.template-golden-hour .poster-lineup { margin-top: calc(165px * var(--social-density)); }
+.social-poster.template-minimalist .poster-title-block { border-bottom-width: 2px; }
+.social-poster.template-minimalist .poster-bottom { border-top: 2px solid currentColor; margin-top: calc(30px * var(--social-density)); }
+.social-poster .expanded-content { gap: calc(35px * var(--social-density)); }
+.social-poster .composition-masthead { font-size: calc(1.65cqw * var(--social-density)); padding-bottom: calc(20px * var(--social-density)); }
+.social-poster .composition-title { padding: calc(12px * var(--social-density)) 0; }
+.social-poster .composition-title p { margin-top: calc(20px * var(--social-density)); }
+.social-poster .composition-art-plate { width: calc(600px * var(--social-density)); max-width: 100%; align-self: center; justify-self: center; flex-shrink: 0; }
+.social-poster .composition-lineup { gap: calc(30px * var(--social-density)); }
+.social-poster .composition-tier-label { font-size: calc(1.7cqw * var(--social-density)); margin-bottom: calc(15px * var(--social-density)); gap: calc(15px * var(--social-density)); }
+.social-poster .composition-tier { padding: calc(10px * var(--social-density)); }
+.social-poster .composition-footer { padding-top: calc(20px * var(--social-density)); }
+.social-poster .composition-colophon { font-size: calc(1.4cqw * var(--social-density)); margin-top: calc(22px * var(--social-density)); }
+.social-poster .editorial-deck { font-size: calc(3.5cqw * var(--social-density)); }
+.social-poster .editorial-deck span:last-child { font-size: calc(2cqw * var(--social-density)); }
+.social-poster.template-editorial .composition-tier-label { font-size: calc(1.4cqw * var(--social-density)); }
+.social-poster.template-editorial .composition-tier-label > span { font-size: calc(4cqw * var(--social-density)); }
+.social-poster.template-editorial .expanded-content { gap: calc(30px * var(--social-density)); }
+.social-poster.template-brutalist .composition-tier-0 .composition-artist { padding: calc(10px * var(--social-density)); margin-bottom: calc(8px * var(--social-density)); }
+.social-poster.template-botanical .composition-title { padding-bottom: calc(24px * var(--social-density)); }
+.social-square .poster-lineup, .social-square .composition-lineup { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); align-items: start; }
+.social-square .poster-tier-0, .social-square .composition-tier-0 { grid-column: 1 / -1; }
+.social-square .poster-tier-0 { flex-direction: row; }
+.social-square .poster-tier-0 span:first-child { flex-basis: auto; }
+.social-square .composition-art-plate { width: calc(390px * var(--social-density)); }
+.social-square.template-editorial .composition-lineup { display: flex; }
+.social-square.template-golden-hour .poster-lineup, .social-square.template-tokyo-nights .poster-lineup { margin-top: calc(55px * var(--social-density)); }
+@media(max-width:760px) { .project-dialog:has(.social-export-studio) { padding: 24px 18px; width: 95vw; }.social-export-studio { grid-template-columns: 1fr; gap: 24px; }.social-export-preview { order: -1; width: min(100%,320px); justify-self: center; }.social-format-options { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); }.social-format-option { padding: 10px; gap: 7px; }.social-format-option > svg { display: none; }.social-format-option strong { font-size: 11px; }.social-format-option small { font-size: 9px; } }
+
+.social-poster .orbital-lines { height: auto; aspect-ratio: 3 / 4; }
+.social-download-again { text-align: center; justify-content: center; }
+.project-dialog > .social-export-studio { display: grid; gap: 32px; justify-content: normal; }
+.social-poster h2 { padding-right: 0; }
+.social-poster p { color: inherit; margin-bottom: 0; }
+@media(max-width:760px) { .project-dialog > .social-export-studio { gap: 24px; } }
+
+.social-preview-viewport { margin-inline: auto; }
+.social-export-preview { position: sticky; top: 0; }
+@media(max-width:760px) { .social-export-preview { position: static; } }

@@ -117,3 +117,19 @@ PNG uses that same poster DOM, vector artwork, colors and embedded local fonts.
 Japanese and Korean select bundled Noto Sans fallbacks; Vietnamese serif text
 uses Noto Serif for complete diacritics. Added fonts are from Google Fonts under
 the SIL Open Font License; license files are in `public/fonts`.
+
+## Social Media Export Studio
+
+Open **Social Media Export Studio** below the existing Export poster button.
+Choose Standard poster (1000 × 1500), Square (1080 × 1080), Portrait
+(1080 × 1350), or Story (1080 × 1920), name the file, and download a PNG.
+The original adaptive poster and schedule exports remain available.
+
+All eleven templates use the same renderer and bundled multilingual fonts as
+the live preview. Social canvases reflow the lineup and fit typography, spacing,
+and vector artwork within exact pixel dimensions. Dense lineups show a review
+notice; an export that cannot fit safely is blocked with an explanation.
+Story reserves 250 pixels at the top/bottom and 60 pixels at each side for
+content. Safe-area guides are preview overlays and are never exported.
+Format changes and export filenames do not modify a saved festival's design.
+A download-again link is provided after rendering if automatic download is blocked.

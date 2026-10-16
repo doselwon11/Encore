@@ -4,11 +4,11 @@ import { fontFamily, titleSize, type PosterDesign, type TextGroup } from "@/lib/
 import { TemplateArtwork } from "./template-artwork";
 
 const editions = { "japanese-city-pop": "SIDE A / COASTAL FREQUENCIES", brutalist: "NO RULES. JUST SOUND.", psychedelic: "ENTER ANOTHER FREQUENCY", editorial: "THE LIVE MUSIC ISSUE", "cyber-rave": "SYSTEM ONLINE / LIVE TRANSMISSION", botanical: "A GATHERING IN FULL BLOOM" };
-export function ExpandedPosterContent({ festival, design }: { festival: Festival; design: PosterDesign }) {
+export function ExpandedPosterContent({ festival, design, density = 1 }: { festival: Festival; design: PosterDesign; density?: number }) {
   const template = design.template;
   function type(group: TextGroup, text: string, size: number): CSSProperties {
     const value = design.typography[group];
-    return { fontFamily: fontFamily(value.font, text), fontSize: `${size * value.size}cqw`, letterSpacing: `${value.spacing}em`, lineHeight: value.lineHeight, textAlign: value.align, justifyContent: { left: "flex-start", center: "center", right: "flex-end" }[value.align] };
+    return { fontFamily: fontFamily(value.font, text), fontSize: `${size * value.size * density}cqw`, letterSpacing: `${value.spacing}em`, lineHeight: value.lineHeight, textAlign: value.align, justifyContent: { left: "flex-start", center: "center", right: "flex-end" }[value.align] };
   }
   const isEditorial = template === "editorial";
   return <div className="expanded-content" style={{fontFamily:fontFamily("sans", Object.values(festival).filter(v=>typeof v === "string").join(" "))}}>
